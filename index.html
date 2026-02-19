@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOR PRACHI</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            overflow: hidden;
+            font-family: 'Arial Black', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #startBtn {
+            padding: 30px 60px;
+            font-size: 2rem;
+            background: white;
+            color: black;
+            border: 5px solid red;
+            cursor: pointer;
+            z-index: 1000;
+            font-weight: bold;
+        }
+
+        /* Extreme fast flashing */
+        .flash-bg {
+            animation: strobe 0.05s infinite;
+        }
+
+        @keyframes strobe {
+            0% { background-color: white; }
+            50% { background-color: #ff0000; } /* Flashes between white and red */
+            100% { background-color: black; }
+        }
+
+        /* Screen shaking effect */
+        .shake {
+            animation: shake 0.1s infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(0,0); }
+            25% { transform: translate(5px, 5px); }
+            50% { transform: translate(-5px, -5px); }
+            75% { transform: translate(5px, -5px); }
+            100% { transform: translate(0,0); }
+        }
+
+        .win-text {
+            position: absolute;
+            white-space: nowrap;
+            user-select: none;
+            pointer-events: none;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="startBtn">PRACHI OPENNN THIS</button>
+
+    <script>
+        const btn = document.getElementById('startBtn');
+        
+        btn.addEventListener('click', () => {
+            btn.style.display = 'none';
+            document.body.classList.add('flash-bg');
+            document.body.classList.add('shake');
+
+            // The Infinite Loop
+            setInterval(() => {
+                const text = document.createElement('div');
+                text.className = 'win-text';
+                text.innerText = "I WON!";
+                
+                // Random position
+                text.style.top = Math.random() * 100 + "vh";
+                text.style.left = Math.random() * 100 + "vw";
+                
+                // Random size
+                text.style.fontSize = (Math.random() * 80 + 20) + "px";
+                
+                // Random color (Black or Yellow for high contrast against flashing)
+                text.style.color = Math.random() > 0.5 ? 'black' : 'yellow';
+                
+                // Random rotation
+                text.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+                document.body.appendChild(text);
+
+                // Keep performance stable so phone doesn't freeze completely
+                if (document.body.children.length > 300) {
+                    document.body.removeChild(document.body.children[1]); 
+                }
+            }, 20); // Adds a new message every 20 milliseconds (super fast)
+        });
+    </script>
+</body>
+</html>
